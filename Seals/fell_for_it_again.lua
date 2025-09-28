@@ -65,10 +65,14 @@ SMODS.Consumable:take_ownership('wheel_of_fortune', -- object key (class prefix 
 				func = function()
 					sendDebugMessage("Adding Fell For It Seal", "BoosterPackDBG")
 					local num_cards = 0
+                    local card_indices = {}
 					for k, v in ipairs(G.playing_cards) do 
-						num_cards = k
+						if v:get_seal(true) ~= 'siri_fell_for_it_again' then
+                            card_indices[num_cards] = k    
+                            num_cards = num_cards + 1                        
+                        end
 					end
-					G.playing_cards[math.random(num_cards)]:set_seal('siri_fell_for_it_again', nil, true)
+					G.playing_cards[card_indices[math.random(num_cards - 1)]]:set_seal('siri_fell_for_it_again', nil, true)
                 return true end }))
         end
     end,
