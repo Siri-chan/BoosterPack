@@ -4,7 +4,17 @@ return {
         Blind={},
         Edition={},
         Enhanced={},
-        Joker={},
+        Joker={
+            j_siri_nothing_ever_happens = {
+				name = "Nothing Ever Happens",
+				text = {
+					"{C:mult}+#1#{} Mult for every {V:1}Fell For It Again Award{} in the full deck.",
+                    "{X:mult,C:white}X#2#{} Mult for every {C:tarot}Wheel of Fortune{} played since the last hit.",
+                    "",
+                    "{C:inactive}(Currently {C:mult}+#3# Mult{C:inactive} and {X:mult,C:white}X#4#{}{C:inactive} Mult)"
+				}
+			}
+        },
         Other={
 			siri_fell_for_it_again_seal = {
 				name = "Fell For It Again Award",

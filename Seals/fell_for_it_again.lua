@@ -29,10 +29,13 @@ SMODS.Seal {
 SMODS.Consumable:take_ownership('wheel_of_fortune', -- object key (class prefix not required)
     { -- table of properties to change from the existing object
 
+    config = { extra = { odds = 4 } },
+
 	-- Wheel of Fortune, adapted from VanillaRemade [Permalink](https://github.com/nh6574/VanillaRemade/blob/014b0b0c62a3cd7bccd04872b84fc572a52f8fe4/src/tarots.lua#L616)
 	use = function(self, card, area, copier)
 		-- String here is just a seed
         if SMODS.pseudorandom_probability(card, 'wheel_of_fortune', 1, 4) then
+            G.GAME.siri_wheel_failure = false
             local editionless_jokers = SMODS.Edition:get_edition_cards(G.jokers, true)
 
             local eligible_card = pseudorandom_element(editionless_jokers, 'vremade_wheel_of_fortune')
@@ -41,6 +44,7 @@ SMODS.Consumable:take_ownership('wheel_of_fortune', -- object key (class prefix 
             eligible_card:set_edition(edition, true)
             check_for_unlock({ type = 'have_edition' })
         else
+            G.GAME.siri_wheel_failure = true
             G.E_MANAGER:add_event(Event({
                 trigger = 'after',
                 delay = 0.4,
