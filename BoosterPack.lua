@@ -6,5 +6,7 @@ SMODS.current_mod.description_loc_vars = function(self)
 end
 
 assert(SMODS.load_file("Seals/Seals.lua"))()
+assert(SMODS.load_file("Jokers/Jokers.lua"))()
 assert(SMODS.load_file("Atlases/Atlases.lua"))()
+assert(SMODS.load_file("Keybinds/Keybinds.lua"))()
 
