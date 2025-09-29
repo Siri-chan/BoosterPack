@@ -9,7 +9,9 @@ return {
 			siri_fell_for_it_again_seal = {
 				name = "Fell For It Again Award",
 				text = {
-					"Does Nothing. FOR NOW...",
+					"Debuffs this card unless",
+                    "played {C:attention}poker hand{} has",
+                    "already been played this round",
 				}
 			}
 		},

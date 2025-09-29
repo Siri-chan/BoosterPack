@@ -7,8 +7,20 @@ SMODS.Seal {
 
 	-- self - this seal prototype
     -- card - card this seal is applied to
-    calculate = function(self, card, context)
-		--sendDebugMessage(self.key:lower().."_seal")
+    calculate = function(self, card, context)        
+        if  context.before and 
+            context.cardarea == G.play 
+        then
+            if
+                not G.GAME.hands[context.scoring_name] or 
+                G.GAME.hands[context.scoring_name].played_this_round < 2
+            then
+                sendDebugMessage("Fell For It Again :: Debuffing Card", "BoosterPackDBG")
+                card:set_debuff(true)
+            else
+                card:set_debuff(false)
+            end
+        end
 	end,
 }
 
