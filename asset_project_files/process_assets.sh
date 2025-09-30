@@ -1,7 +1,7 @@
 #! /bin/bash -v
 
 # Space-separated
-INPUTS=" Seals-fell_for_it_again.kra"
+INPUTS=" Seals-fell_for_it_again.kra Jokers-nothing_ever_happens.kra"
 
 mkdir -p ./out/1x ./out/2x
 for file in $INPUTS ; do

@@ -7,12 +7,12 @@ SMODS.Seal {
 
 	-- self - this seal prototype
     -- card - card this seal is applied to
-    calculate = function(self, card, context)        
-        if  context.before and 
-            context.cardarea == G.play 
+    calculate = function(self, card, context)
+        if  context.before and
+            context.cardarea == G.play
         then
             if
-                not G.GAME.hands[context.scoring_name] or 
+                not G.GAME.hands[context.scoring_name] or
                 G.GAME.hands[context.scoring_name].played_this_round < 2
             then
                 sendDebugMessage("Fell For It Again :: Debuffing Card", "BoosterPackDBG")
@@ -24,7 +24,6 @@ SMODS.Seal {
 	end,
 }
 
--- TODO: Don't add seal to card that already has one.
 -- Overwrite the Wheel of Fortune calculate:
 SMODS.Consumable:take_ownership('wheel_of_fortune', -- object key (class prefix not required)
     { -- table of properties to change from the existing object
@@ -34,7 +33,7 @@ SMODS.Consumable:take_ownership('wheel_of_fortune', -- object key (class prefix 
 	-- Wheel of Fortune, adapted from VanillaRemade [Permalink](https://github.com/nh6574/VanillaRemade/blob/014b0b0c62a3cd7bccd04872b84fc572a52f8fe4/src/tarots.lua#L616)
 	use = function(self, card, area, copier)
 		-- String here is just a seed
-        if SMODS.pseudorandom_probability(card, 'wheel_of_fortune', 1, 4) then
+        if SMODS.pseudorandom_probability(card, 'wheel_of_fortune', 1, card.ability.extra.odds) then
             G.GAME.siri_wheel_failure = false
             local editionless_jokers = SMODS.Edition:get_edition_cards(G.jokers, true)
 
@@ -82,10 +81,10 @@ SMODS.Consumable:take_ownership('wheel_of_fortune', -- object key (class prefix 
 					sendDebugMessage("Adding Fell For It Seal", "BoosterPackDBG")
 					local num_cards = 0
                     local card_indices = {}
-					for k, v in ipairs(G.playing_cards) do 
+					for k, v in ipairs(G.playing_cards) do
 						if v:get_seal(true) ~= 'siri_fell_for_it_again' then
-                            card_indices[num_cards] = k    
-                            num_cards = num_cards + 1                        
+                            card_indices[num_cards] = k
+                            num_cards = num_cards + 1
                         end
 					end
 					G.playing_cards[card_indices[math.random(num_cards - 1)]]:set_seal('siri_fell_for_it_again', nil, true)
